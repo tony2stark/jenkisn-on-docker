@@ -1,0 +1,42 @@
+part 1   : docker
+part 2   : jenkins
+
+part 1: docker
+
+isntallations
+
+
+1.apt-get update
+
+
+#install dependencies
+2.sudo apt-get update
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+    
+    
+#since apt-get doesnt have docker repo we need to add docker repo to apt-get package
+#to do that we need to have gpg key
+3.sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+
+#now add the docker repo to apt-get package
+4.echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  
+  
+  #now update the apt-get package
+ 5.apt-get update
+ 
+ 
+ #now install the docker
+ 6.apt-get install docker-ce
+ 
+ #check docker has installed
+ 7.docker run hello-world
+
